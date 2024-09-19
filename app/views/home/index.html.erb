@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= t('home.title') %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <%= link_to t('home.title'), root_path %> |
+      <%= link_to 'Donations', donations_path %> |
+      <%= link_to 'Projects', projects_path %> |
+      <%= link_to 'Donors', donors_path %> |
+      <%= link_to 'Expenses', expenses_path %>
+    </nav>
+  </header>
+
+  <main>
+    <h1><%= t('home.welcome') %></h1>
+    <p>Estamos felizes em tê-lo aqui. Explore nossos projetos, faça doações e ajude-nos a fazer a diferença!</p>
+  </main>
+
+  <footer>
+    <p>&copy; <%= Time.now.year %> <%=  t('project_title') %>. <%= t('home.footer') %></p>
+  </footer>
+</body>
+</html>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "home#index"
+
   resources :donations
   resources :projects
   resources :donors
