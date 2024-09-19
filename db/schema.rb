@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_19_023429) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_19_024712) do
   create_table "donations", force: :cascade do |t|
     t.float "total_value"
     t.date "date"
@@ -30,6 +30,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_19_023429) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "expenses", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "total_value"
+    t.string "supplier_identification_number"
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_expenses_on_project_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -41,4 +52,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_19_023429) do
 
   add_foreign_key "donations", "donors"
   add_foreign_key "donations", "projects"
+  add_foreign_key "expenses", "projects"
 end
