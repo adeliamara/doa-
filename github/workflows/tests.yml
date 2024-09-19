@@ -1,0 +1,43 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - feat/add-workflow
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0.6'  # Substitua pela versão do Ruby que você está usando
+
+    - name: Cache Bundler
+      uses: actions/cache@v3
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-bundler-
+
+    - name: Install dependencies
+      run: bundle install --path vendor/bundle
+
+    - name: Set up Database
+      run: |
+        cp config/database.yml.github ci
+        rails db:create RAILS_ENV=test
+        rails db:schema:load RAILS_ENV=test
+
+    - name: Run tests
+      run: bundle exec rspec  # ou o comando que você usa para rodar os testes, por exemplo, `rails test` para Minitest
