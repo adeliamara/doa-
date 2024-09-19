@@ -1,6 +1,9 @@
 pt-BR:
   project_title: Doa+
-
+  expenses: Despesas
+  donors: Doadores
+  projects: Projetos
+  donations: Doações
   home:
     title: "Doa+"
     hello: "Olá"
