@@ -40,4 +40,4 @@ jobs:
         rails db:schema:load RAILS_ENV=test
 
     - name: Run tests
-      run: bundle exec rspec  # ou o comando que você usa para rodar os testes, por exemplo, `rails test` para Minitest
+        run: rails test
