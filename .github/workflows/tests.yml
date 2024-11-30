@@ -20,24 +20,22 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.0.6'  # Substitua pela versão do Ruby que você está usando
+        ruby-version: '3.0.6'  # Substitua pela versão que seu projeto usa
 
-    - name: Cache Bundler
-      uses: actions/cache@v3
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-bundler-
+    - name: Install Bundler
+      run: gem install bundler
 
     - name: Install dependencies
       run: bundle install --path vendor/bundle
 
     - name: Set up Database
+      env:
+        RAILS_ENV: test
       run: |
-        cp config/database.yml.github ci
-        rails db:create RAILS_ENV=test
-        rails db:schema:load RAILS_ENV=test
+        bundle exec rails db:create
+        bundle exec rails db:schema:load
 
     - name: Run tests
-        run: rails test
+      env:
+        RAILS_ENV: test
+      run: bundle exec rails test
