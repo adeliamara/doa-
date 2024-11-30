@@ -40,4 +40,4 @@ jobs:
         rails db:schema:load RAILS_ENV=test
 
     - name: Run tests
-        run: rails test
+      run: rails test  # Corrigido a indentação
