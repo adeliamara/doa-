@@ -1,7 +1,7 @@
 require "test_helper"
 
 class DonorTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should the truth" do
+    assert false
+  end
 end
