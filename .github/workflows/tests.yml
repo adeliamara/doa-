@@ -34,10 +34,13 @@ jobs:
       run: bundle install --path vendor/bundle
 
     - name: Set up Database
+      env:  # Configura variáveis de ambiente para o Rails usar o `test` environment
+        RAILS_ENV: test
       run: |
-        cp config/database.yml.github ci
-        rails db:create RAILS_ENV=test
-        rails db:schema:load RAILS_ENV=test
+        rails db:create
+        rails db:schema:load
 
     - name: Run tests
-      run: rails test  # Corrigido a indentação
+      env:  # Certifique-se de que o ambiente de teste está configurado
+        RAILS_ENV: test
+      run: rails test
